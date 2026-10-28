@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#060a0f" />
+  <title>JARVIS Pro — Automation Edition</title>
+  <style>
+    :root{color-scheme:dark;--bg:#060a0f;--panel:#0b121a;--line:rgba(99,211,222,.16);--cyan:#36d8e8;--gold:#e8c64b;--muted:#91a0ad;--white:#edf5f6;--green:#55e0aa;--red:#ff6d70}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 48% 0%,rgba(0,145,159,.13),transparent 42%),var(--bg);color:var(--white);font:15px/1.5 Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
+    a{color:inherit;text-decoration:none}.shell{width:min(1120px,calc(100% - 40px));margin:auto}.top{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2em}.sigil{width:34px;height:34px;border:1px solid rgba(54,216,232,.55);border-radius:10px;display:grid;place-items:center;color:var(--cyan);background:rgba(54,216,232,.08);font-size:16px}.brand small{display:block;font-size:9px;letter-spacing:.25em;color:#73828d;font-weight:500}.toplink{border:1px solid var(--line);padding:8px 13px;border-radius:999px;color:#c6d3d5;font:10px ui-monospace,monospace;letter-spacing:.12em}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center;padding:80px 0 68px}.eyebrow{color:var(--gold);font:10px ui-monospace,monospace;letter-spacing:.27em;text-transform:uppercase}.hero h1{font-size:clamp(40px,6vw,70px);line-height:.98;letter-spacing:-.045em;margin:18px 0 20px}.hero h1 em{font-style:normal;color:var(--cyan)}.hero p{max-width:540px;color:#9baab4;font-size:16px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:27px}.btn{border:0;border-radius:9px;padding:12px 17px;font:700 11px ui-monospace,monospace;letter-spacing:.1em;cursor:pointer;transition:.18s}.btn-primary{background:linear-gradient(100deg,var(--cyan),#91f1e6);color:#031114}.btn-primary:hover{filter:brightness(1.12);transform:translateY(-1px)}.btn-secondary{border:1px solid var(--line);background:#091119;color:#d6e1e3}.btn-secondary:hover{border-color:var(--cyan);color:var(--cyan)}
+    .terminal{border:1px solid rgba(54,216,232,.23);background:linear-gradient(160deg,rgba(12,24,32,.98),rgba(6,10,15,.98));border-radius:16px;padding:22px;box-shadow:0 20px 70px rgba(0,0,0,.35),0 0 45px rgba(54,216,232,.06);position:relative}.terminal:before{content:"";position:absolute;top:-1px;left:-1px;width:25px;height:25px;border-left:2px solid var(--cyan);border-top:2px solid var(--cyan);border-radius:16px 0 0}.t-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}.t-title{font:700 11px ui-monospace,monospace;letter-spacing:.15em;color:var(--cyan)}.live{color:var(--green);font:9px ui-monospace,monospace}.live:before{content:"";display:inline-block;background:var(--green);width:6px;height:6px;border-radius:99px;margin-right:6px;box-shadow:0 0 10px var(--green)}.label{display:block;color:#93a5ae;font:10px ui-monospace,monospace;letter-spacing:.12em;margin-bottom:8px}.inputrow{display:flex;gap:9px}.keyinput{width:100%;min-width:0;border:1px solid rgba(54,216,232,.22);border-radius:8px;background:#05090d;color:#f5fbfb;padding:12px 13px;font:12px ui-monospace,monospace;outline:none}.keyinput:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(54,216,232,.08)}.keyinput::placeholder{color:#586772}.status{min-height:20px;margin:12px 0 0;color:#9daeb7;font:10px ui-monospace,monospace}.status.ok{color:var(--green)}.status.err{color:var(--red)}.result{display:none;border:1px solid rgba(85,224,170,.22);background:rgba(85,224,170,.055);border-radius:9px;margin-top:12px;padding:12px;font:10px/1.6 ui-monospace,monospace;color:#c8f3e1}.result.show{display:block}.fine{color:#6f808a;font:9px/1.55 ui-monospace,monospace;margin-top:13px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:20px}.section-head h2{font-size:24px;margin:0;letter-spacing:-.02em}.section-head p{margin:0;color:#7f909a;font-size:12px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;padding-bottom:68px}.feature{padding:18px;border:1px solid var(--line);border-radius:12px;background:rgba(11,18,26,.76);min-height:152px}.feature-icon{color:var(--cyan);font-size:18px}.feature h3{margin:14px 0 7px;font-size:14px}.feature p{margin:0;color:#83939e;font-size:12px;line-height:1.6}.lower{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-bottom:68px}.info{border:1px solid var(--line);border-radius:13px;background:rgba(11,18,26,.65);padding:21px}.info h3{font:700 11px ui-monospace,monospace;color:var(--gold);letter-spacing:.15em;margin:0 0 10px}.info p{font-size:12px;color:#8d9ca6;margin:0}.issue-steps{margin:10px 0 0;padding-left:18px;color:#8d9ca6;font-size:12px}.issue-steps li{margin:5px 0}.operator-details{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}.operator-details summary{color:var(--cyan);font:10px ui-monospace,monospace;letter-spacing:.08em;cursor:pointer}.operator-details p{margin-top:9px}.operator-details code{color:#bfeef0;font:11px ui-monospace,monospace}.admin-panel{margin-top:12px;border:1px solid rgba(54,216,232,.15);border-radius:10px;background:rgba(0,0,0,.2);padding:12px}.admin-panel label{display:block;margin-top:10px;color:#93a5ae;font:9px ui-monospace,monospace;letter-spacing:.08em}.admin-panel input,.admin-panel select{width:100%;margin-top:5px;border:1px solid rgba(54,216,232,.18);border-radius:7px;background:#05090d;color:var(--white);padding:9px;font:11px ui-monospace,monospace}.admin-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.admin-key{display:none;word-break:break-all;margin-top:10px;padding:12px;border:1px solid rgba(85,224,170,.2);border-radius:8px;background:rgba(85,224,170,.05);color:#baf4da;font:12px ui-monospace,monospace}.admin-key.show{display:block}.admin-status{min-height:16px;margin-top:8px;color:#93a5ae;font:9px ui-monospace,monospace}.admin-status.err{color:var(--red)}.admin-status.ok{color:var(--green)}.footer{border-top:1px solid var(--line);padding:20px 0 28px;color:#697983;font:9px ui-monospace,monospace;display:flex;justify-content:space-between;gap:20px}.toast{position:fixed;inset:auto 22px 22px auto;background:#111c22;border:1px solid var(--line);border-radius:10px;padding:12px 16px;font:11px ui-monospace,monospace;color:#c7d8dc;display:none;max-width:320px;box-shadow:0 12px 36px rgba(0,0,0,.4)}.toast.show{display:block}
+    @media(max-width:780px){.hero{grid-template-columns:1fr;gap:30px;padding:54px 0}.features{grid-template-columns:1fr 1fr}.lower{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:8px}.toplink{display:none}}
+    @media(max-width:500px){.shell{width:calc(100% - 28px)}.features{grid-template-columns:1fr}.inputrow{flex-direction:column}.inputrow .btn{width:100%}.footer{display:block}.footer span{display:block;margin-top:5px}}
+  </style>
+</head>
+<body>
+  <header class="top shell"><a href="#top" class="brand"><span class="sigil">J</span><span>JARVIS <span style="color:var(--cyan)">PRO</span><small>AUTOMATION EDITION</small></span></a><a class="toplink" href="#activate">LICENSE CHECK // ACTIVE</a></header>
+  <main id="top" class="shell">
+    <section class="hero">
+      <div><div class="eyebrow">Operator tools, amplified</div><h1>Make your workflows<br><em>work for you.</em></h1><p>JARVIS Pro adds scheduled automations, reusable workflows, device-bound license checks, and HTTPS webhook actions to the complete JARVIS desktop assistant.</p><div class="actions"><a class="btn btn-primary" href="#activate">CHECK A PRO KEY</a><a class="btn btn-secondary" href="#features">EXPLORE PRO FEATURES</a></div></div>
+      <div id="activate" class="terminal"><div class="t-head"><span class="t-title">JARVIS PRO // LICENSE VALIDATOR</span><span class="live">SERVICE ONLINE</span></div><form id="license-form"><label class="label" for="license-key">ENTER LICENSE KEY</label><div class="inputrow"><input id="license-key" class="keyinput" autocomplete="off" spellcheck="false" placeholder="JARVIS-PRO-••••••••••••" required maxlength="128"/><button id="verify-btn" class="btn btn-primary" type="submit">VERIFY KEY</button></div></form><div id="status" class="status" aria-live="polite">Verification uses the JARVIS License Service. Website checks do not consume an activation slot.</div><div id="result" class="result"></div><div class="fine">Keys are hashed server-side. The website never receives the service-role key. Do not send your key to anyone you do not trust.</div></div>
+    </section>
+    <section id="features"><div class="section-head"><h2>Pro tools built around your workflow</h2><p>Includes the complete free JARVIS experience.</p></div><div class="features">
+      <article class="feature"><div class="feature-icon">⌘</div><h3>Workflow Builder</h3><p>Save repeatable JARVIS prompts, run them on demand, and attach trusted HTTPS webhooks.</p></article>
+      <article class="feature"><div class="feature-icon">◷</div><h3>Scheduled Runs</h3><p>Hourly or daily tasks run while the desktop app is open. No hidden background service is installed.</p></article>
+      <article class="feature"><div class="feature-icon">◈</div><h3>License & Device Control</h3><p>Server-side key verification, expiry and revocation checks, plus a configurable device limit.</p></article>
+      <article class="feature"><div class="feature-icon">↗</div><h3>Webhook Integrations</h3><p>Send workflow-start events to your HTTPS endpoints. You control the receiving service and data.</p></article>
+      <article class="feature"><div class="feature-icon">◎</div><h3>Global Intel Console</h3><p>Interactive globe and event layers from the JARVIS desktop app. Demo markers are identified as simulated.</p></article>
+      <article class="feature"><div class="feature-icon">▣</div><h3>Encrypted Local Vault</h3><p>Store private notes and credentials on-device using a passphrase-derived AES-GCM key. JARVIS never receives the vault contents.</p></article>
+      <article class="feature"><div class="feature-icon">⌖</div><h3>Local Network Radar</h3><p>Review listening TCP ports and local process names. Review flags are indicators—not malware detections—and nothing is remotely scanned.</p></article>
+      <article class="feature"><div class="feature-icon">⌁</div><h3>Coming integration setup</h3><p>Google Drive and Slack require your OAuth app credentials and production redirect domains before they can be activated.</p></article>
+    </div></section>
+    <section class="lower"><article class="info"><h3>HOW TO GET & ACTIVATE A LICENSE</h3><p>JARVIS Pro is in manual early access; online checkout is not enabled. To request a key, contact the JARVIS publisher through the support channel provided with your installer. The publisher issues it privately—never post or share your key publicly.</p><ol class="issue-steps"><li>Enter your issued key in the validator above to check that it is active. This website check does not consume a device activation.</li><li>Install JARVIS Pro, paste the same key into the activation screen, and activate your device while online.</li><li>Keep the key for future reinstalls; device limits, expiry, or revocation are managed by the publisher.</li></ol><details class="operator-details"><summary>LICENSE ADMIN // SIGN IN TO ISSUE A KEY</summary><div class="admin-panel"><p>Admin-only key issuance. A one-time email sign-in link is sent to the allowlisted operator address; no website password is used. The backend stores only the key digest.</p><button id="admin-signin" class="btn btn-secondary" type="button">SEND ADMIN SIGN-IN LINK</button><button id="admin-signout" class="btn btn-secondary" type="button" style="display:none;margin-left:8px">SIGN OUT</button><div id="admin-status" class="admin-status" aria-live="polite"></div><div id="admin-issue-controls" style="display:none"><label for="issue-email">CUSTOMER EMAIL (OPTIONAL)<input id="issue-email" type="email" autocomplete="off" placeholder="customer@example.com"/></label><div class="admin-row"><label for="issue-days">EXPIRY<select id="issue-days"><option value="30">30 days</option><option value="90">90 days</option><option value="365" selected>1 year</option><option value="730">2 years</option><option value="0">No expiry</option></select></label><label for="issue-devices">DEVICE LIMIT<select id="issue-devices"><option>1</option><option>2</option><option selected>3</option><option>5</option><option>10</option></select></label></div><button id="issue-key" class="btn btn-primary" type="button" style="width:100%;margin-top:12px">CREATE PRO LICENSE</button><div id="issued-key" class="admin-key"><strong>NEW KEY — COPY IT NOW</strong><br><code id="issued-key-value"></code><button id="copy-issued-key" class="btn btn-secondary" type="button" style="margin-top:9px">COPY KEY</button><div style="margin-top:8px;color:#91a0ad;font-size:9px">The raw key is shown once and cannot be retrieved later.</div></div></div></div></details><details class="operator-details"><summary>BACKUP // MANUAL KEY ISSUANCE</summary><p>From the project root, run <code>python3 tools/generate_paid_license.py</code>, execute the printed SQL in the Supabase SQL Editor, and deliver the raw key privately. The database stores only its SHA-256 digest. Never put a service-role key in this site or desktop build.</p></details></article><article class="info"><h3>SAFE LICENSE ENFORCEMENT</h3><p>If a key expires or is revoked, Pro activation is blocked and the app asks the operator to renew or sign out. It does not silently uninstall software or delete user data.</p><p style="margin-top:10px">Scheduled automations run only while the desktop app is open. HTTPS webhooks are supported; Google Drive and Slack OAuth setup is still pending.</p></article></section>
+  </main>
+  <footer class="shell footer"><span>© 2026 JARVIS PRO // STONIC AI</span><span>EARLY ACCESS • ADMIN-ISSUED LICENSES • NO CHECKOUT CONNECTED</span></footer>
+  <div id="toast" class="toast" role="status"></div>
+  <script>
+    // Publishable key only. Service-role credentials remain on Supabase Edge Functions.
+    const SUPABASE_URL = 'https://wjfjyqbizqzwiivggzah.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Gti01GU9tf_jNumKuwEqiQ_lKBGMNBG';
+    const form = document.getElementById('license-form');
+    const input = document.getElementById('license-key');
+    const button = document.getElementById('verify-btn');
+    const status = document.getElementById('status');
+    const result = document.getElementById('result');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const licenseKey = input.value.trim().toUpperCase();
+      if (!licenseKey) return;
+      button.disabled = true; button.textContent = 'CHECKING…';
+      status.className = 'status'; status.textContent = 'Contacting the license service securely…'; result.className = 'result'; result.textContent = '';
+      try {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/verify-paid-license`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUBLISHABLE_KEY, 'Authorization': `Bearer ${SUPABASE_PUBLISHABLE_KEY}` },
+          body: JSON.stringify({ license_key: licenseKey, activate: false })
+        });
+        const data = await response.json();
+        if (!response.ok || !data.valid) {
+          status.className = 'status err'; status.textContent = data.message || 'Key not valid. Check the key or contact the publisher.';
+          return;
+        }
+        const features = Object.entries(data.features || {}).filter(([, enabled]) => enabled).map(([name]) => name.replaceAll('_',' ')).join(' • ');
+        status.className = 'status ok'; status.textContent = 'VALID KEY // JARVIS PRO entitlement confirmed.';
+        result.innerHTML = `<strong>LICENSE VERIFIED</strong><br>Plan: ${escapeHtml(data.tier || 'PRO')}<br>Expires: ${data.expires_at ? escapeHtml(new Date(data.expires_at).toLocaleDateString()) : 'No expiry set'}<br>Features: ${escapeHtml(features || 'Pro features')}<br><br>Next: install JARVIS Pro and enter this key to activate your device. This check did not use an activation slot.`;
+        result.className = 'result show';
+      } catch (error) {
+        status.className = 'status err'; status.textContent = 'Cannot reach license verification. Check your connection and retry.';
+        console.error('License check failed', error);
+      } finally {
+        button.disabled = false; button.textContent = 'VERIFY KEY';
+      }
+    });
+    const ADMIN_EMAIL = 'aryanghorpade001@gmail.com';
+    const ADMIN_TOKEN_KEY = 'jarvis_license_admin_access_token';
+    const adminStatus = document.getElementById('admin-status');
+    const signInButton = document.getElementById('admin-signin');
+    const signOutButton = document.getElementById('admin-signout');
+    const issueControls = document.getElementById('admin-issue-controls');
+    const issuedKeyBox = document.getElementById('issued-key');
+    const issuedKeyValue = document.getElementById('issued-key-value');
+    const setAdminStatus = (message, kind = '') => { adminStatus.className = `admin-status ${kind}`; adminStatus.textContent = message; };
+    const setAdminSignedIn = (signedIn) => { issueControls.style.display = signedIn ? 'block' : 'none'; signOutButton.style.display = signedIn ? 'inline-block' : 'none'; signInButton.style.display = signedIn ? 'none' : 'inline-block'; };
+    const authCallback = new URLSearchParams(window.location.hash.slice(1));
+    const callbackToken = authCallback.get('access_token');
+    if (callbackToken) {
+      sessionStorage.setItem(ADMIN_TOKEN_KEY, callbackToken);
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    async function validateAdminSession() {
+      const token = sessionStorage.getItem(ADMIN_TOKEN_KEY);
+      if (!token) { setAdminSignedIn(false); return; }
+      try {
+        const response = await fetch(`${SUPABASE_URL}/auth/v1/user`, { headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: `Bearer ${token}` } });
+        const user = await response.json();
+        if (response.ok && String(user.email || '').toLowerCase() === ADMIN_EMAIL) {
+          setAdminSignedIn(true); setAdminStatus(`Signed in as ${ADMIN_EMAIL}. License creation is restricted to this allowlisted account.`, 'ok');
+        } else {
+          sessionStorage.removeItem(ADMIN_TOKEN_KEY); setAdminSignedIn(false); setAdminStatus('Admin session expired or not authorized. Sign in again.', 'err');
+        }
+      } catch {
+        setAdminSignedIn(false); setAdminStatus('Could not verify the admin session. Check the connection.', 'err');
+      }
+    }
+    signInButton.addEventListener('click', async () => {
+      signInButton.disabled = true; setAdminStatus(`Sending a one-time sign-in link to ${ADMIN_EMAIL}…`);
+      try {
+        const redirect = `${window.location.origin}${window.location.pathname}`;
+        const response = await fetch(`${SUPABASE_URL}/auth/v1/otp?redirect_to=${encodeURIComponent(redirect)}`, {
+          method: 'POST', headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: ADMIN_EMAIL, create_user: true })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.msg || data.message || 'Supabase could not send the sign-in email.');
+        setAdminStatus('Check the admin inbox and open the one-time sign-in link. It will return here; no password is stored in the site.', 'ok');
+      } catch (error) { setAdminStatus(error.message || 'Could not send the sign-in email.', 'err'); }
+      finally { signInButton.disabled = false; }
+    });
+    signOutButton.addEventListener('click', async () => {
+      const token = sessionStorage.getItem(ADMIN_TOKEN_KEY);
+      try { if (token) await fetch(`${SUPABASE_URL}/auth/v1/logout`, { method: 'POST', headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: `Bearer ${token}` } }); } catch {}
+      sessionStorage.removeItem(ADMIN_TOKEN_KEY); setAdminSignedIn(false); setAdminStatus('Signed out.'); issuedKeyBox.className = 'admin-key';
+    });
+    document.getElementById('issue-key').addEventListener('click', async () => {
+      const token = sessionStorage.getItem(ADMIN_TOKEN_KEY);
+      if (!token) { setAdminStatus('Sign in before issuing a license.', 'err'); return; }
+      const button = document.getElementById('issue-key'); button.disabled = true; button.textContent = 'CREATING…';
+      issuedKeyBox.className = 'admin-key'; issuedKeyValue.textContent = '';
+      try {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/issue-paid-license`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: `Bearer ${token}` },
+          body: JSON.stringify({ customer_email: document.getElementById('issue-email').value.trim(), expires_in_days: Number(document.getElementById('issue-days').value), max_devices: Number(document.getElementById('issue-devices').value) })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.issued || !data.license_key) throw new Error(data.error || 'License issuance failed.');
+        issuedKeyValue.textContent = data.license_key; issuedKeyBox.className = 'admin-key show';
+        setAdminStatus(`Created ${data.customer_email ? `for ${data.customer_email}` : 'an unassigned key'}; expires ${data.expires_at ? new Date(data.expires_at).toLocaleDateString() : 'never'}; limit ${data.max_devices} device(s). Copy it now.`, 'ok');
+        document.getElementById('issue-email').value = '';
+      } catch (error) {
+        if (/expired|invalid/i.test(error.message)) { sessionStorage.removeItem(ADMIN_TOKEN_KEY); setAdminSignedIn(false); }
+        setAdminStatus(error.message || 'License issuance failed.', 'err');
+      } finally { button.disabled = false; button.textContent = 'CREATE PRO LICENSE'; }
+    });
+    document.getElementById('copy-issued-key').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(issuedKeyValue.textContent); setAdminStatus('Key copied. Store it securely and share it only with its owner.', 'ok'); }
+      catch { setAdminStatus('Clipboard access was blocked. Select and copy the key manually.', 'err'); }
+    });
+    validateAdminSession();
+
+    function escapeHtml(text) { return String(text).replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char])); }
+  </script>
+</body>
+</html>

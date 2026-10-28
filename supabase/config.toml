@@ -1,0 +1,7 @@
+project_id = "wjfjyqbizqzwiivggzah"
+
+[functions.verify-paid-license]
+verify_jwt = false
+
+[functions.issue-paid-license]
+verify_jwt = true
